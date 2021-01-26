@@ -18,7 +18,7 @@
 * [Contact](#contact)
 
 ## General info
-Add more general information about project. What the purpose of the project is? Motivation?
+Information about the project! The Reason for this is to provide more convienience when it comes to changing songs and using spotify with your broswer!
 
 ## Screenshots
 ![Example screenshot](./img/screenshot.png)
