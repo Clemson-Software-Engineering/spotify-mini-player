@@ -2,6 +2,8 @@
 This is an Open Source Project, feel free to add to it!
 
 Description: Extension for Spotify that provides a compact and intuitive on-screen widget for Spotify functionality.
+Mission Statement: 
+  This project is to make the  
 
 Initial Language: JavaScript (using Electron)
 
