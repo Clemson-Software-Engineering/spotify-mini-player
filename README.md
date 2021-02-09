@@ -12,6 +12,7 @@
 * [Screenshots](#screenshots)
 * [Technologies](#technologies)
 * [Setup](#setup)
+* [User Stories](#user_stories)
 * [Features](#features)
 * [Status](#status)
 * [Inspiration](#inspiration)
@@ -29,6 +30,10 @@ Information about the project! The Reason for this is to provide more convienien
 ## Setup
 The information for how we will be setting up the project will be included shortly
 
+## User Stories
+Here is the link to the user stories for this project 
+https://github.com/Clemson-Software-Engineering/spotify-mini-player/issues 
+
 ## Code Examples
 Show examples of usage:
 examples of code usage will be posted here
@@ -44,10 +49,6 @@ To-do list:
 
 ## Status
 Project is: in progress (pre alpha)
-
-## User Stories
-Here is the link to the user stories for this project 
-https://github.com/Clemson-Software-Engineering/spotify-mini-player/issues 
 
 ## Inspiration
 This project is based on the Chrome extension for the pop out window that allows a mini spotify player to be 
