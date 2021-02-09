@@ -46,7 +46,7 @@ To-do list:
 Project is: in progress (pre alpha)
 
 ## User Stories
-Below is the link to the user stories for this project 
+Here is the link to the user stories for this project 
 https://github.com/Clemson-Software-Engineering/spotify-mini-player/issues 
 
 ## Inspiration
