@@ -1,55 +1,89 @@
-const express = require('express'); // Express web server framework
-const request = require('request'); // "Request" library
-const cors = require('cors');
-const querystring = require('querystring');
-const cookieParser = require('cookie-parser');
-const https = require('https');
-const fs = require('fs');
+var SpotifyWebApi = require('spotify-web-api-node');
+const express = require('express')
 
-const client_id = process.env.SPOTIFY_CLIENT_ID; // Your client id
-const client_hidden_info = process.env.SPOTIFY_CLIENT_HIDDEN_INFO; // client hidden information
-const redirect_uri = process.env.SPOTIFY_REDIRECT_URL; // Your redirect uri
+// This file is copied from: https://github.com/thelinmichael/spotify-web-api-node/blob/master/examples/tutorial/00-get-access-token.js
 
-/**
- * Generates a random string containing numbers and letters
- * @param  {number} length The length of the string
- * @return {string} The generated string
- */
-const randomStringGenerator = length => {
-  let text = '';
-  const possible =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-  for (let i = 0; i < length; i += 1) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-  return text;
-};
-
-const stateKey = 'spotify_auth_state';
-
-const app = express();
-
-app
-  .use(express.static(`${__dirname}/public`))
-  .use(cors())
-  .use(cookieParser());
-
-app.get('/login', (req, res) => {
-  const state = randomStringGenerator(16);
-  res.cookie(stateKey, state);
-
-  // your application requests authorization
-  const scope =
-    'user-follow-read user-read-recently-played user-library-read user-read-playback-state user-library-modify user-read-currently-playing user-modify-playback-state user-follow-modify playlist-read-collaborative playlist-modify-private playlist-modify-public user-read-email playlist-read-private user-top-read user-read-private app-remote-control';
-  res.redirect(
-    `https://accounts.spotify.com/authorize?${querystring.stringify({
-      response_type: 'code',
-      client_id,
-      scope,
-      redirect_uri,
-      state,
-    })}`
+const scopes = [
+    'ugc-image-upload',
+    'user-read-playback-state',
+    'user-modify-playback-state',
+    'user-read-currently-playing',
+    'streaming',
+    'app-remote-control',
+    'user-read-email',
+    'user-read-private',
+    'playlist-read-collaborative',
+    'playlist-modify-public',
+    'playlist-read-private',
+    'playlist-modify-private',
+    'user-library-modify',
+    'user-library-read',
+    'user-top-read',
+    'user-read-playback-position',
+    'user-read-recently-played',
+    'user-follow-read',
+    'user-follow-modify'
+  ];
+  
+// credentials are optional
+var spotifyApi = new SpotifyWebApi({
+    clientId: '3f1f24433d114f5b948d15d762593dba',
+    clientSecret: '9c5811efc21944f4af61cec1d8061adb',
+    redirectUri: 'http://localhost:8888/callback'
+  });
+  
+  const app = express();
+  
+  app.get('/login', (req, res) => {
+    res.redirect(spotifyApi.createAuthorizeURL(scopes));
+  });
+  
+  app.get('/callback', (req, res) => {
+    const error = req.query.error;
+    const code = req.query.code;
+    const state = req.query.state;
+  
+    if (error) {
+      console.error('Callback Error:', error);
+      res.send(`Callback Error: ${error}`);
+      return;
+    }
+  
+    spotifyApi
+      .authorizationCodeGrant(code)
+      .then(data => {
+        const access_token = data.body['access_token'];
+        const refresh_token = data.body['refresh_token'];
+        const expires_in = data.body['expires_in'];
+  
+        spotifyApi.setAccessToken(access_token);
+        spotifyApi.setRefreshToken(refresh_token);
+  
+        console.log('access_token:', access_token);
+        console.log('refresh_token:', refresh_token);
+  
+        console.log(
+          `Sucessfully retreived access token. Expires in ${expires_in} s.`
+        );
+        res.send('Success! You can now close the window.');
+  
+        setInterval(async () => {
+          const data = await spotifyApi.refreshAccessToken();
+          const access_token = data.body['access_token'];
+  
+          console.log('The access token has been refreshed!');
+          console.log('access_token:', access_token);
+          spotifyApi.setAccessToken(access_token);
+        }, expires_in / 2 * 1000);
+      })
+      .catch(error => {
+        console.error('Error getting Tokens:', error);
+        res.send(`Error getting Tokens: ${error}`);
+      });
+  });
+  
+  app.listen(8888, () =>
+    console.log(
+      'HTTP Server up. Now go to http://localhost:8888/login in your browser.'
+    )
   );
-});
-
