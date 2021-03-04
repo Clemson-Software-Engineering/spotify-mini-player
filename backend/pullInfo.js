@@ -1,6 +1,6 @@
 const fs = require('fs')
 const SpotifyWebApi = require('spotify-web-api-node');
-const token = "BQBePLlXVJk24WwKVTs904KLFW5TA5VccDv2-4Fz-xB13lspMvEdIMWibqosl0DSK3ecBl1wLwpoFhFYw9p8R-ECDCL72Xb_lp_QLMCY3o1pITQOAbn48kIbGUoELwXmta9pzLeYvvmqDVC7y_-IAMh3Z8GwbWS1Xof353xdrR4ZyL5w4wryF0oGGU_oECh8AAt7EY6KUdGHvvAp4GpCnz_E_OY0mWfHZLLU2BWunxTyu7pXAAXpgoi-vaunqcZbdMhuCCw6iXbrDEbnevHFWquEAkI";
+const token = "BQBQV-JQUQ0y2LZbLhcUSEm2XTcGJYaN3lAHAc1Gv_4uWL_uFav3AZgy-z4mBtmeFe_mSo4x1-1vnO8MZlenP7qCJ5JuVGwlH91T6h9F0QiNPjQ2CE-mJJyRrLVsf9kZBKeGXsYZQLEyboz8P_oJgYrtfNMWxXfAR8OmPqepdmTtibCJL1Y1h3NqrfLOeo2IjX-RwmjQt3ZoKIJ_BaEY9NDltPMHeUQtiwOIlGAPv276gqujIv7x9tNxrq9R6JWqKe6CuVCK3HH8g--qIBQaC6tRlUc";
 
 const spotifyApi = new SpotifyWebApi();
 spotifyApi.setAccessToken(token);
@@ -20,7 +20,7 @@ function getMyData() {
 // async function getUserPlaylists(userName) {
 //   const data = await spotifyApi.getUserPlaylists(userName)
 
-//   console.log("---------------+++++++++++++++++++++++++")
+//   console.log("++++++++++++++++++++++++++++++++++++++++")
 //   let playlists = []
 
 //   for (let playlist of data.body.items) {
@@ -68,7 +68,7 @@ async function getMyCurrentPlayingTrack(userName) {
       console.log('Something went wrong!', err);
     });
   
-    console.log("---------------+++++++++++++++++++++++++")
+    console.log("+++++++++++++++++++++++++++++++++++++")
   }
 
 getMyData();
