@@ -4,87 +4,83 @@
     box-sizing: border-box;
 }
 
-.player {
+.main {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width:400px;
-    height: 300px;
-    overflow: hidden;
-}
-
-.player .main {
     width: 100%;
     height: 100%;
     background: #1E2125;
 }
 
-.player .main .thumbnail img {
+.main .thumbnail img {
     width:100%;
     height: 65vh;
 }
 
-.player .main .seekbar {
+.main .seekbar {
     margin-top: -15px;
 }
 
-.player .main .seekbar input[type="range"] {
+.main .seekbar input[type="range"] {
    -webkit-appearance: none;
    width: 100%;
    height: 4px;
    outline:none;
    background: #aaa;
    overflow: hidden;
+   cursor: pointer;
 }
 
-.player .main .seekbar input[type="range"]::-webkit-slider-thumb{
+.main .seekbar input[type="range"]::-webkit-slider-thumb{
     -webkit-appearance: none;
     width:0px;
     height:0px;
     box-shadow: -300px 0px 0px 300px #00acee;
 }
 
-.player .main .details {
+.main .details {
     text-align: center;
     padding: 5px 0px;
 }
 
-.player .main .details h2{
+.main .details h2{
     font-size: 18px;
     color:#eee;
     margin-bottom: 5px;
 }
 
-.player .main .details p{
+.main .details p{
     font-family: 15px;
     color:#aaa;
 }
 
-.player .main .controls {
+.main .controls {
     display: flex;
     justify-content: center;
     margin: 5px 0px;
+    cursor: pointer
 }
 
-.player .main .controls > div {
+.main .controls > div {
     margin: 0px 40px;
     cursor: pointer;
 }
 
-.player .main .controls i.fa {
+.main .controls i.fa {
     font-size:25px;
     color: #ddd;
 }
 
-.player .main .controls > div.play-pause-control i.fa {
+.main .controls > div.play-pause-control i.fa {
     display: none; 
 }
 
-.player .main .controls > div.play-pause-control i.fa-play {
+.main .controls > div.play-pause-control i.fa-play {
     display: block; 
 }
 
-.player .main .controls > div.play-pause-control i.fa-pause {
+.main .controls > div.play-pause-control i.fa-pause {
     display: none; 
 }
