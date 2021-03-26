@@ -8,6 +8,7 @@ function createWindow () {
   win = new BrowserWindow({
     width: 400,
     height: 320,
+    frame: true,
     icon: path.join(__dirname, 'icon.png'),
     webPreferences: {
       nodeIntegration: true
@@ -37,8 +38,16 @@ function createWindow () {
       submenu: [
         {label: 'File'},
         {label: 'View'},
-        {label: 'Exit'}
+        {
+          label: 'Exit',
+          click() {
+            app.quit()
+          }
+        }
       ]
+    },
+    {
+      label: "Info"
     }
   ])
 
@@ -51,8 +60,8 @@ function createWindow () {
 app.whenReady().then(createWindow)
 
 //app.on('window-all-closed', () => {
-//if (process.platform !== 'darwin') {
-  //  app.quit()
+  //if (process.platform !== 'darwin') {
+    //app.quit()
   //}
 //})
 
