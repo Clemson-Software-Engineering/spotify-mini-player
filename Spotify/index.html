@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <link rel="stylesheet" type = "text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type = "text/css" href="style.css">
+    <script type="text/javascript" src="/backend/pullInfo.js"></script>
 </head>
 <body>
     <div class = "player">    
@@ -17,8 +18,8 @@
                 <input type="range">
             </div>
             <div class = "details">
-                <h2>Songname</h2>
-                <p>Artistname</p>
+                <h2><script src="/backend/pullInfo.js">getMyCurrentPlayingTrack(userName)</script></h2>
+                <p>Artist Name</p>
             </div>
             <div class ="controls">
                 <div class = "prev-control">
