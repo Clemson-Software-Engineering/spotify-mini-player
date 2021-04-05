@@ -1,7 +1,9 @@
 const fs = require('fs')
+const axios = require("axios")
 const SpotifyWebApi = require('spotify-web-api-node');
-const token = "BQBQV-JQUQ0y2LZbLhcUSEm2XTcGJYaN3lAHAc1Gv_4uWL_uFav3AZgy-z4mBtmeFe_mSo4x1-1vnO8MZlenP7qCJ5JuVGwlH91T6h9F0QiNPjQ2CE-mJJyRrLVsf9kZBKeGXsYZQLEyboz8P_oJgYrtfNMWxXfAR8OmPqepdmTtibCJL1Y1h3NqrfLOeo2IjX-RwmjQt3ZoKIJ_BaEY9NDltPMHeUQtiwOIlGAPv276gqujIv7x9tNxrq9R6JWqKe6CuVCK3HH8g--qIBQaC6tRlUc";
-
+const { stringify } = require('querystring');
+const token = "BQDz_eBMI7OsB_OoU-5XL3fmekCQBKCh8TggunXpRaHiOw0-0raLitO-IUatceC8SBttS9Z9F5xSjWF9IkT7HOgIBKV0Hu8u2ViQGhS2IE36qJJ7gacD3JfFcv6RFj7SvJrg5AfYwhHVA4ai8ry98FQhsJJIsLHR8M_pFdRwfzxMR2xRG67ngsS_dCPzvu1MtJqF_aqP7JAkjJpE5ksjKuRxuo6ZD6MXg1A1y19X3qJAcLkDlA0I0W3rg22SLHpzeULISKbIGzy1eKWHvcGgYe316TM";
+accessToken = "Bearer"
 const spotifyApi = new SpotifyWebApi();
 spotifyApi.setAccessToken(token);
 
@@ -11,64 +13,50 @@ function getMyData() {
     const me = await spotifyApi.getMe();
     // console.log(me.body);
     getMyCurrentPlayingTrack(me.body.id);
+
   })().catch(e => {
     console.error(e);
   });
 }
 
-//GET MY PLAYLISTS
-// async function getUserPlaylists(userName) {
-//   const data = await spotifyApi.getUserPlaylists(userName)
-
-//   console.log("++++++++++++++++++++++++++++++++++++++++")
-//   let playlists = []
-
-//   for (let playlist of data.body.items) {
-//     console.log(playlist.name + " " + playlist.id)
-    
-//     let tracks = await getPlaylistTracks(playlist.id, playlist.name);
-//     // console.log(tracks);
-
-//     const tracksJSON = { tracks }
-//     let data = JSON.stringify(tracksJSON);
-//     fs.writeFileSync(playlist.name+'.json', data);
-//   }
-// }
-
-// //GET SONGS FROM PLAYLIST
-// async function getPlaylistTracks(playlistId, playlistName) {
-
-//   const data = await spotifyApi.getPlaylistTracks(playlistId, {
-//     offset: 1,
-//     limit: 100,
-//     fields: 'items'
-//   })
-
-//   // console.log('The playlist contains these tracks', data.body);
-//   // console.log('The playlist contains these tracks: ', data.body.items[0].track);
-//   // console.log("'" + playlistName + "'" + ' contains these tracks:');
-//   let tracks = [];
-
-//   for (let track_obj of data.body.items) {
-//     const track = track_obj.track
-//     tracks.push(track);
-//     console.log(track.name + " : " + track.artists[0].name)
-//   }
-  
-//   console.log("---------------+++++++++++++++++++++++++")
-//   return tracks;
-// }
-
-//GET MY PLAYLISTS
 async function getMyCurrentPlayingTrack(userName) {
+   albumID = null
     const data = await spotifyApi.getMyCurrentPlayingTrack()
     .then(function(data) {
-      console.log('Now playing: ' + data.body.item.name);
+      albumID = data.body.item.album.id
+      str = stringify(data)
     }, function(err) {
       console.log('Something went wrong!', err);
     });
-  
+    
+    let url = 'https://api.spotify.com/v1/albums/'+albumID+'?market=FI'
+
+    axios.get(url, {
+      headers: {
+        "Authorization": "Bearer " + token
+      }
+      })
+      .then((res) => {
+        console.log(res.data)
+        console.log("++++++_____________+++++++++++++______")
+        console.log(res.data.artists[0].name)
+        console.log(res.data.images[0].url)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
     console.log("+++++++++++++++++++++++++++++++++++++")
+
   }
 
+  // async function getCurrentTrackAlbum(userName) {
+  //   const data = await spotifyApi.getAlbum()
+  //   .then(function(data) {
+  //     console.log('Song Image: ' + data.body.image[0]);
+  //   }, function(err) {
+  //     console.log('Something went wrong!', err);
+  //   });
+  // GET https://api.spotify.com/v1/shows/2yB9jTRog4XGCKG5bpNZUA?market=FI
+  //   console.log("+++++++++++++++++++++++++++++++++++++")
+  // }
 getMyData();
