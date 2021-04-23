@@ -1,0 +1,96 @@
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing: border-box;
+}
+
+.main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: #1E2125;
+    transition: all 500ms ease-in-out;
+}
+
+.main .thumbnail img {
+    width:100%;
+    height: 65vh;
+}
+
+.main .seekbar {
+    margin-top: -15px;
+}
+
+.main .seekbar input[type="range"] {
+   -webkit-appearance: none;
+   width: 100%;
+   height: 4px;
+   outline:none;
+   background: #aaa;
+   overflow: hidden;
+   cursor: pointer;
+}
+
+.main .seekbar input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    width:0px;
+    height:0px;
+    box-shadow: -300px 0px 0px 300px #00acee;
+}
+
+.main .details {
+    text-align: center;
+    padding: 5px 0px;
+}
+
+.main .details h2{
+    font-size: 18px;
+    color:#eee;
+    margin-bottom: 5px;
+}
+
+.main .details p{
+    font-family: 15px;
+    color:#aaa;
+}
+
+.main .controls {
+    display: flex;
+    justify-content: center;
+    margin: 5px 0px;
+    cursor: pointer;
+
+}
+
+.main .controls > div {
+    margin: 0px 30px;
+    cursor: pointer;
+}
+
+.main .controls i.fa {
+    font-size:20px;
+    color: #ddd;
+    text-align:center;
+}
+
+.main .controls i.fa:hover {
+    color: #00acee;
+}
+
+/*.main .controls > div.play-pause-control i.fa {
+    display: none; 
+}
+
+.main .controls > div.play-pause-control i.fa-play {
+    display: block; 
+    /*border: 2px solid #ddd;
+    padding: 3px 5px 3px 6px;
+    border-radius: 50%;
+} 
+
+/*.main .controls > div.play-pause-control i.fa-pause {
+    display: none; 
+}*/

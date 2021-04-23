@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Minify</title>
+        <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+        <link rel="stylesheet" type = "text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type = "text/css" href="style.css">
+        <script type="text/javascript" src="/backend/pullInfo.js"></script>
+        
+
+    </head>
+    <body style ="-webkit-app-region: drag">
+        <div class = "player">    
+            <div class = "main">
+                <div class = "thumbnail">
+                    <img id="track_image" src="./Files/preview.jpg">
+                    
+                </div>
+                <div class="seekbar">
+                    <input type="range" min="0" max="100" value="0" id="duration_slider"
+                    onchange="change_duration()">
+                </div>
+                <div class = "details">
+                    <h2 id="title">Song Name</h2>
+                    <p id ="artist">Artist Name</p>
+                </div>
+                <div class ="controls">
+                    <div class = "prev-control">
+                        <!--<button onclick="previous_song()" id="pre" > -->
+                        <i onclick="previous_song()" id="pre" class = "fa fa-backward"></i></button>
+                    </div>
+                    <div class="play-pause-control">
+                            <i onclick="justplay()" id="play" class = "fa fa-play"></i>
+                            <!--<i class = "fa fa-pause"></i> -->
+                    </div>
+                    <div class = "next-control">
+                        <!--<button onclick="next_song()" id="next"> -->
+                            <i onclick="next_song()" id="next" class = "fa fa-forward"></i></button>
+                    </div>
+                </div>
+            </div>
+            <p id="demo">test</p>
+            </div>
+        </div>
+    <script src ='./script.js'></script>   
+    <script src="/backend/pullInfo.js"></script> 
+    </body>
+</html>
+
